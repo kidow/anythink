@@ -33,11 +33,38 @@
         margin-block-start: 1em;
         margin-block-end: 1em;
       }
+      .panel {
+        border: none !important;
+      }
+      .note-statusbar,
+      .note-status-output {
+        display: none !important;
+      }
+      .note-editable {
+        min-height: 97vh !important;
+        padding: 7rem 0 !important;
+      }
+      .note-editable p {
+        margin: 0;
+      }
+      .note-toolbar {
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        background-color: #fff !important;
+        border: none;
+      }
+      .btn-default {
+        border: none;
+        font-size: 24px;
+      }
     </style>
     <style media="screen"></style>
   </head>
   <body>
-    <div class="container mx-auto"><div id="summernote"></div></div>
+    <div class="container mx-auto">
+      <div id="summernote"><p></p></div>
+    </div>
 
     <script>
       function debounce(func, wait, immediate) {
@@ -57,7 +84,7 @@
         $("#summernote").summernote({
           lang: "ko-KR",
           toolbar: [
-            ["h1", "h2"],
+            ["style", ["style"]],
             [
               "style",
               [
