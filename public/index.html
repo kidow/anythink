@@ -20,18 +20,75 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="lang/summernote-ko-KR.js"></script>
+    <style>
+      ul {
+        list-style-type: disc;
+      }
+      ol {
+        list-style-type: decimal;
+      }
+      ul,
+      ol {
+        padding-inline-start: 40px;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+      }
+    </style>
     <style media="screen"></style>
   </head>
   <body>
-    <div class="container mx-auto">
-      <div id="summernote"><p></p></div>
-    </div>
+    <div class="container mx-auto"><div id="summernote"></div></div>
 
     <script>
+      function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+          var context = this,
+            args = arguments;
+          clearTimeout(timeout);
+          timeout = setTimeout(function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          }, wait);
+          if (immediate && !timeout) func.apply(context, args);
+        };
+      }
       $(document).ready(function () {
         $("#summernote").summernote({
           lang: "ko-KR",
+          toolbar: [
+            ["h1", "h2"],
+            [
+              "style",
+              [
+                "bold",
+                "italic",
+                "underline",
+                "strike",
+                "strikethrough",
+                "clear",
+              ],
+            ],
+            ["fontsize", ["fontsize"]],
+            ["color", ["color"]],
+            ["para", ["ul", "ol"]],
+            ["inset", ["link", "picture", "video"]],
+            ["table", ["table"]],
+            ["view", ["fullscreen", "codeview", "help"]],
+          ],
+          placeholder: "지금 떠오르는 생각은?",
+          spellCheck: false,
+          focus: true,
+          callbacks: {
+            onChange: debounce(function (contents, $editable) {
+              window.localStorage.setItem("anythink", contents);
+            }, 1000),
+          },
         });
+        $("#summernote").summernote(
+          "pasteHTML",
+          window.localStorage.getItem("anythink") || ""
+        );
       });
     </script>
   </body>
