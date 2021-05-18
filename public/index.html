@@ -26,8 +26,10 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="lang/summernote-ko-KR.js"></script>
-    <style></style>
     <style>
+      body {
+        background-color: #000;
+      }
       ul {
         list-style-type: disc;
       }
@@ -50,6 +52,8 @@
       .note-editable {
         min-height: 97vh !important;
         padding: 7rem 0 !important;
+        background-color: #000;
+        color: #999;
       }
       .note-editable p {
         margin: 0;
@@ -58,12 +62,14 @@
         position: fixed;
         top: 0;
         z-index: 10;
-        background-color: #fff !important;
         border: none;
+        background-color: #000 !important;
       }
       .btn-default {
         border: none;
         font-size: 24px;
+        color: #999 !important;
+        background-color: #000;
       }
     </style>
   </head>
